@@ -1,25 +1,25 @@
 
-function markupImage(arrImages) {
+export default async function markupImage(arrImages, element) {
 
-    const markap = arrImages.map(elementImage => 
+    const markap = arrImages.map(({ webformatURL, tags, likes, views, comments, downloads }) => 
     `<div class="photo-card">
-        <img src="${arrImages.webformatURL}" alt="${arrImages.tags}" loading="lazy" />
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" width=200px"/>
         <div class="info">
           <p class="info-item">
-            <b>Likes</b> ${arrImages.likes}
+            <b>Likes</b> ${likes}
           </p>
           <p class="info-item">
-            <b>Views</b> ${arrImages.views}
+            <b>Views</b> ${views}
           </p>
           <p class="info-item">
-            <b>Comments</b> ${arrImages.comments}
+            <b>Comments</b> ${comments}
           </p>
           <p class="info-item">
-            <b>Downloads</b> ${arrImages.downloads}
+            <b>Downloads</b> ${downloads}
           </p>
         </div>
     </div>`
-    );
-    
-    return markap;
-}
+    ).join('');
+
+    element.insertAdjacentHTML("beforeend" ,markap);
+};
