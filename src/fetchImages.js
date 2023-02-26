@@ -11,8 +11,7 @@ export default async function getImages(query, page) {
           if(response.data.total === 0) {
         throw new Error(Notify.failure('Sorry, there are no images matching your search query. Please try again.'));
       };
-      // console.log(response.data.hits);
-      // console.log(response);
+      
       return response.data;
 
     } catch (error) {
