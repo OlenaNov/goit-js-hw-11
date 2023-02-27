@@ -6,12 +6,14 @@ import markupImage from './markup-image-card';
 import getImages from './fetchImages';
 import refs from './refs';
 
-refs.btnLoadMore.style.display = "none";
 
 refs.form.addEventListener('submit', onSubmit);
 
 let queryValue = "";
 let currentPage = 1;
+const visibilityBtnLoadMore = state => refs.btnLoadMore.style.display = state;
+
+visibilityBtnLoadMore("none");
 
 function onSubmit(e) {
     e.preventDefault();
@@ -27,14 +29,14 @@ async function makeFetch() {
 
         const fetchResult = await getImages(queryValue, currentPage);
         markupImage(fetchResult.hits, refs.gallery);
-        refs.btnLoadMore.style.display = "block";
+        visibilityBtnLoadMore("block");
 
         if(currentPage === 1) {
             Notify.success(`Hooray! We found ${fetchResult.totalHits} images.`);
         };
 
         if(currentPage * 40 >= fetchResult.totalHits) {
-            refs.btnLoadMore.style.display = "none";
+            visibilityBtnLoadMore("none");
             Notify.warning("We're sorry, but you've reached the end of search results.");
         };
 
