@@ -49,6 +49,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
     animationSpeed:	300,
   });
 
+  console.log(lightbox);
+
   refs.btnLoadMore.addEventListener('click', onBtnLoadMore);
 
 function onBtnLoadMore() {
@@ -56,9 +58,3 @@ function onBtnLoadMore() {
     makeFetch();
     lightbox.refresh();
 };
-
-refs.gallery.addEventListener('click', onClickImage);
-
-function onClickImage(e) {
-    console.log(e.currentTarget);
-}
