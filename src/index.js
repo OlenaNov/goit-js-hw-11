@@ -18,7 +18,6 @@ visibilityBtnLoadMore("none");
 function onSubmit(e) {
     e.preventDefault();
     queryValue = refs.form.elements.searchQuery.value;
-    console.log(queryValue);
     refs.gallery.innerHTML = "";
     currentPage = 1;
     makeFetch();
@@ -52,12 +51,9 @@ const lightbox = new SimpleLightbox('.gallery a', {
     animationSpeed:	300,
   });
 
-  console.log(lightbox);
-
   refs.btnLoadMore.addEventListener('click', onBtnLoadMore);
 
 function onBtnLoadMore() {
     currentPage += 1;
     makeFetch();
-    lightbox.refresh();
 };
