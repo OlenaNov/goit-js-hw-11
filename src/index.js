@@ -1,6 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// import SimpleLightbox from "simplelightbox";
-// import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 import markupImage from './markup-image-card';
 import getImages from './fetchImages';
@@ -29,6 +29,7 @@ async function makeFetch() {
 
         const fetchResult = await getImages(queryValue, currentPage);
         markupImage(fetchResult.hits, refs.gallery);
+        lightbox.refresh();
         visibilityBtnLoadMore("block");
 
         if(currentPage === 1) {
@@ -46,17 +47,17 @@ async function makeFetch() {
 };
 
 
-// const lightbox = new SimpleLightbox('.gallery a', { 
+const lightbox = new SimpleLightbox('.gallery a', { 
 
-//     animationSpeed:	300,
-//   });
+    animationSpeed:	300,
+  });
 
-//   console.log(lightbox);
+  console.log(lightbox);
 
   refs.btnLoadMore.addEventListener('click', onBtnLoadMore);
 
 function onBtnLoadMore() {
     currentPage += 1;
     makeFetch();
-    // lightbox.refresh();
+    lightbox.refresh();
 };
