@@ -46,17 +46,17 @@ async function makeFetch() {
 };
 
 
-const lightbox = new SimpleLightbox('.gallery a', { 
+// const lightbox = new SimpleLightbox('.gallery a', { 
 
-    animationSpeed:	300,
-  });
+//     animationSpeed:	300,
+//   });
 
-  console.log(lightbox);
+//   console.log(lightbox);
 
   refs.btnLoadMore.addEventListener('click', onBtnLoadMore);
 
 function onBtnLoadMore() {
     currentPage += 1;
     makeFetch();
-    lightbox.refresh();
+    // lightbox.refresh();
 };
