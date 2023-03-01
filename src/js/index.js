@@ -2,9 +2,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-import markupImage from './markup-image-card';
-import getImages from './fetchImages';
-import refs from './refs';
+import markupImage from '../js/markup-image-card';
+import getImages from './fetch-images';
+import refs from '../js/refs';
 
 
 refs.form.addEventListener('submit', onSubmit);
@@ -35,6 +35,10 @@ async function makeFetch() {
             Notify.success(`Hooray! We found ${fetchResult.totalHits} images.`);
         };
 
+        if(currentPage !== 1) {
+            makeSmoothPageScrolling();
+        };
+
         if(currentPage * 40 >= fetchResult.totalHits) {
             visibilityBtnLoadMore("none");
             Notify.warning("We're sorry, but you've reached the end of search results.");
@@ -47,7 +51,6 @@ async function makeFetch() {
 
 
 const lightbox = new SimpleLightbox('.gallery a', { 
-
     animationSpeed:	300,
   });
 
@@ -56,4 +59,21 @@ const lightbox = new SimpleLightbox('.gallery a', {
 function onBtnLoadMore() {
     currentPage += 1;
     makeFetch();
+
+};
+
+function makeSmoothPageScrolling() {
+    
+const { height: cardHeight } = refs.gallery.firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
+};
+
+refs.gallery.lastElementChild.addEventListener('scroll', makeInfiniteScroll);
+
+function makeInfiniteScroll () {
+    console.log('FINISH');
 };
